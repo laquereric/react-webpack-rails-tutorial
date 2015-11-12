@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import CommentBox from './CommentBox';
+import FamousComponent from './FamousComponent';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as commentsActionCreators from '../actions/commentsActionCreators';
@@ -14,7 +15,7 @@ class CommentScreen extends React.Component {
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired
   };
 
   render() {
@@ -22,23 +23,28 @@ class CommentScreen extends React.Component {
     const actions = bindActionCreators(commentsActionCreators, dispatch);
     return (
       <div>
-        <CommentBox
-          pollInterval={5000}
-          data={data}
-          actions={actions}
-          ajaxCounter={data.get('ajaxCounter')}
-        />
-        <div className="container">
-          <a href="http://www.railsonmaui.com">
-            <h3 className="open-sans-light">
-              <div className="logo" />
-              Example of styling using image-url and Open Sans Light custom font
-            </h3>
-          </a>
-          <a href="https://twitter.com/railsonmaui">
-            <div className="twitter-image" />
-            Rails On Maui on Twitter
-          </a>
+        <div>
+          <FamousComponent/>
+        </div>
+        <div>
+          <CommentBox
+            pollInterval={5000}
+            data={data}
+            actions={actions}
+            ajaxCounter={data.get('ajaxCounter')}
+          />
+          <div className="container">
+            <a href="http://www.railsonmaui.com">
+              <h3 className="open-sans-light">
+                <div className="logo" />
+                Example of styling using image-url and Open Sans Light custom font
+              </h3>
+            </a>
+            <a href="https://twitter.com/railsonmaui">
+              <div className="twitter-image" />
+              Rails On Maui on Twitter
+            </a>
+          </div>
         </div>
       </div>
     );
