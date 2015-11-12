@@ -36,7 +36,6 @@ config.module.loaders.push(
   {
     test: /\.jsx?$/,
     loader: 'babel',
-    exclude: /node_modules/,
     query: {
       plugins: ['react-transform'],
       extra: {
