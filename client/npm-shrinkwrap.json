@@ -3985,7 +3985,7 @@
     "react-famous": {
       "version": "0.1.7",
       "from": "react-famous@>=0.1.7 <0.2.0",
-      "resolved": "./../../../workspace/react-famous"
+      "resolved": "react-famous" 
     },
     "react-overlays": {
       "version": "0.5.1",
