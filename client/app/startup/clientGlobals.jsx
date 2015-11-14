@@ -1,5 +1,5 @@
 import App from './ClientApp';
-import SimpleCommentScreen from '../components/SimpleCommentScreen';
+import CommentScreen from '../components/CommentScreen';
 
 window.App = App;
-window.SimpleCommentScreen = SimpleCommentScreen;
+window.CommentScreen = CommentScreen;

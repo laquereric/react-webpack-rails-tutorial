@@ -1,37 +1,83 @@
-import React, { PropTypes } from 'react';
-import CommentBox from './CommentBox';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as commentsActionCreators from '../actions/commentsActionCreators';
-
-function select(state) {
-  // Which part of the Redux global state does our component want to receive as props?
-  return { data: state.$$commentsStore };
-}
+import React from 'react';
+import Immutable from 'immutable';
+import request from 'axios';
+import CommentForm from './CommentForm';
+import CommentList from './CommentList';
+import metaTagsManager from '../utils/metaTagsManager';
+import _ from 'lodash';
 
 class CommentScreen extends React.Component {
-  static displayName = 'CommentScreen';
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      $$comments: Immutable.fromJS([]),
+      ajaxSending: false,
+      fetchCommentsError: null,
+      submitCommentError: null,
+    };
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired,
-  };
+    _.bindAll(this, '_fetchComments', '_handleCommentSubmit');
+  }
+
+  static displayName = 'SimpleCommentScreen';
+
+  componentDidMount() {
+    this._fetchComments();
+  }
+
+  _fetchComments() {
+    return request.get('comments.json', { responseType: 'json' })
+      .then(res => this.setState({ $$comments: Immutable.fromJS(res.data) }))
+      .catch(error => this.setState({ fetchCommentsError: error }));
+  }
+
+  _handleCommentSubmit(comment) {
+    this.setState({ ajaxSending: true });
+
+    const requestConfig = {
+      responseType: 'json',
+      headers: {
+        'X-CSRF-Token': metaTagsManager.getCSRFToken(),
+      },
+    };
+
+    return request.post('comments.json', { comment }, requestConfig)
+      .then(() => {
+        const { $$comments } = this.state;
+        const $$comment = Immutable.fromJS(comment);
+
+        this.setState({
+          $$comments: $$comments.push($$comment),
+          ajaxSending: false,
+        });
+      })
+      .catch(error => {
+        this.setState({
+          submitCommentError: error,
+          ajaxSending: false,
+        });
+      });
+  }
 
   render() {
-    const { dispatch, data } = this.props;
-    const actions = bindActionCreators(commentsActionCreators, dispatch);
     return (
-      <div>
-        <CommentBox
-          pollInterval={5000}
-          data={data}
-          actions={actions}
-          ajaxCounter={data.get('ajaxCounter')}
+      <div className="commentBox container">
+        <h2>Comments</h2>
+        <p>
+          commentScreen: Text takes Github Flavored Markdown.
+        </p>
+        <CommentForm
+          ajaxSending={this.state.ajaxSending}
+          actions={{ submitComment: this._handleCommentSubmit}}
+          error={this.state.submitCommentError}
+        />
+        <CommentList
+          $$comments={this.state.$$comments}
+          error={this.state.fetchCommentsError}
         />
       </div>
     );
   }
 }
 
-// Don't forget to actually use connect!
-export default connect(select)(CommentScreen);
+export default CommentScreen;

@@ -50,9 +50,7 @@ class CommentForm extends React.Component {
 
     const comment = { author: this.state.comment.author, text: '' };
     this.setState({ comment });
-
-    let ref = this.refs.text.getInputDOMNode();
-    ref.focus();
+    this.refs.text.focus();
   }
 
   _formInline() {
