@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react';
 import Input from 'react-bootstrap/lib/Input';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
 import Alert from 'react-bootstrap/lib/Alert';
 import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 import _ from 'lodash';
@@ -15,7 +13,6 @@ class CommentForm extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      formMode: 0,
       comment: emptyComment,
     };
 
