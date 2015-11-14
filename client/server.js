@@ -7,6 +7,7 @@ var sleep = require('sleep');
 var config = require('./webpack.client.hot.config');
 
 var comments = [
+  { author: 'Author', text: 'Text' }
 ];
 
 var server = new WebpackDevServer(webpack(config), {
