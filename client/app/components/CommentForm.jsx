@@ -78,83 +78,7 @@ class CommentForm extends React.Component {
 
     ref.focus();
   }
-
-  _formHorizontal() {
-    return (
-      <div>
-        <hr />
-        <form className="commentForm form-horizontal" onSubmit={this._handleSubmit}>
-          <Input
-            type="text"
-            label="Name"
-            placeholder="Your Name"
-            labelClassName="col-sm-2"
-            wrapperClassName="col-sm-10"
-            ref="author"
-            value={this.state.comment.author}
-            onChange={this._handleChange}
-            disabled={this.props.ajaxSending}
-          />
-          <Input
-            type="textarea"
-            label="Text"
-            placeholder={textPlaceholder}
-            labelClassName="col-sm-2"
-            wrapperClassName="col-sm-10"
-            ref="text"
-            value={this.state.comment.text}
-            onChange={this._handleChange}
-            disabled={this.props.ajaxSending}
-          />
-          <div className="form-group">
-            <div className="col-sm-offset-2 col-sm-10">
-              <input
-                type="submit"
-                className="btn btn-primary"
-                value="Post"
-                disabled={this.props.ajaxSending}
-              />
-            </div>
-          </div>
-        </form>
-      </div>
-    );
-  }
-
-  _formStacked() {
-    return (
-      <div>
-        <hr />
-        <form className="commentForm form" onSubmit={this._handleSubmit}>
-          <Input
-            type="text"
-            label="Name"
-            placeholder="Your Name"
-            ref="author"
-            value={this.state.comment.author}
-            onChange={this._handleChange}
-            disabled={this.props.ajaxSending}
-          />
-          <Input
-            type="textarea"
-            label="Text"
-            placeholder={textPlaceholder}
-            ref="text"
-            value={this.state.comment.text}
-            onChange={this._handleChange}
-            disabled={this.props.ajaxSending}
-          />
-          <input
-            type="submit"
-            className="btn btn-primary"
-            value="Post"
-            disabled={this.props.ajaxSending}
-          />
-        </form>
-      </div>
-    );
-  }
-
+  
   _formInline() {
     return (
       <div>
@@ -211,20 +135,7 @@ class CommentForm extends React.Component {
   }
 
   render() {
-    let inputForm;
-    switch (this.state.formMode) {
-      case 0:
-        inputForm = this._formHorizontal();
-        break;
-      case 1:
-        inputForm = this._formStacked();
-        break;
-      case 2:
-        inputForm = this._formInline();
-        break;
-      default:
-        throw new Error(`Unknown form mode: ${this.state.formMode}.`);
-    }
+    let inputForm = this._formInline();
     return (
       <div>
         <ReactCSSTransitionGroup
@@ -234,12 +145,6 @@ class CommentForm extends React.Component {
         >
           {this._errorWarning()}
         </ReactCSSTransitionGroup>
-
-        <Nav bsStyle="pills" activeKey={this.state.formMode} onSelect={this._handleSelect}>
-          <NavItem eventKey={0}>Horizontal Form</NavItem>
-          <NavItem eventKey={1}>Stacked Form</NavItem>
-          <NavItem eventKey={2}>Inline Form</NavItem>
-        </Nav>
         {inputForm}
       </div>
     );
