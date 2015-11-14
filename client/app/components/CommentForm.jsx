@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 import Input from 'react-bootstrap/lib/Input';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
 import Alert from 'react-bootstrap/lib/Alert';
 import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 import _ from 'lodash';
@@ -53,44 +51,38 @@ class CommentForm extends React.Component {
     this.refs.text.focus();
   }
 
-  _formInline() {
+  _form() {
     return (
       <div>
         <hr />
         <form className="commentForm form" onSubmit={this._handleSubmit}>
-          <Input label="Inline Form" wrapperClassName="wrapper">
-            <Row>
-              <Col xs={3}>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Your Name"
-                  ref="author"
-                  value={this.state.comment.author}
-                  onChange={this._handleChange}
-                  disabled={this.props.ajaxSending}
-                />
-              </Col>
-              <Col xs={8}>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder={textPlaceholder}
-                  ref="text"
-                  value={this.state.comment.text}
-                  onChange={this._handleChange}
-                  disabled={this.props.ajaxSending}
-                />
-              </Col>
-              <Col xs={1}>
-                <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Post"
-                  disabled={this.props.ajaxSending}
-                />
-              </Col>
-            </Row>
+          <Input label="Form" wrapperClassName="wrapper">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Your Name"
+              ref="author"
+              value={this.state.comment.author}
+              onChange={this._handleChange}
+              disabled={this.props.ajaxSending}
+            />
+
+            <input
+              type="text"
+              className="form-control"
+              placeholder={textPlaceholder}
+              ref="text"
+              value={this.state.comment.text}
+              onChange={this._handleChange}
+              disabled={this.props.ajaxSending}
+            />
+
+            <input
+              type="submit"
+              className="btn btn-primary"
+              value="Post"
+              disabled={this.props.ajaxSending}
+            />
           </Input>
         </form>
       </div>
@@ -109,7 +101,6 @@ class CommentForm extends React.Component {
   }
 
   render() {
-    let inputForm = this._formInline();
     return (
       <div>
         <ReactCSSTransitionGroup
@@ -119,7 +110,7 @@ class CommentForm extends React.Component {
         >
           {this._errorWarning()}
         </ReactCSSTransitionGroup>
-        {inputForm}
+        {this._form()}
       </div>
     );
   }

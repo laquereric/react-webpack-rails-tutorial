@@ -64,7 +64,7 @@ class CommentScreen extends React.Component {
       <div className="commentBox container">
         <h2>Comments</h2>
         <p>
-          commentScreen: Text takes Github Flavored Markdown.
+          Text takes Github Flavored Markdown.
         </p>
         <CommentForm
           ajaxSending={this.state.ajaxSending}
