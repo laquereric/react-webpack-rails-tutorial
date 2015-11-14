@@ -78,7 +78,7 @@ class CommentForm extends React.Component {
 
     ref.focus();
   }
-  
+
   _formInline() {
     return (
       <div>
