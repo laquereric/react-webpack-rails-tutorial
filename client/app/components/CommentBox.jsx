@@ -42,8 +42,7 @@ class CommentBox extends React.Component {
           Comments { this._isSendingAjax() && `SENDING AJAX REQUEST! Ajax Counter is ${this._ajaxCounter()}` }
         </h2>
         <p>
-          Text take Github Flavored Markdown. Comments older than 24 hours are deleted.
-          <b>Name</b> is preserved, <b>Text</b> is reset, between submits.
+          Text take Github Flavored Markdown.
         </p>
         <CommentForm
           ajaxSending={this._isSendingAjax()}
