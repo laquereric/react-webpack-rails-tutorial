@@ -19,7 +19,7 @@ class CommentForm extends React.Component {
       comment: emptyComment,
     };
 
-    _.bindAll(this, '_handleSelect', '_handleChange', '_handleSubmit', '_resetAndFocus');
+    _.bindAll(this, '_handleChange', '_handleSubmit', '_resetAndFocus');
   }
 
   static displayName = 'CommentForm';
@@ -30,26 +30,11 @@ class CommentForm extends React.Component {
     error: PropTypes.any,
   };
 
-  _handleSelect(selectedKey) {
-    this.setState({ formMode: selectedKey });
-  }
-
   _handleChange() {
-    let comment;
-
-    if (this.state.formMode < 2) {
-      comment = {
-        author: this.refs.author.getValue(),
-        text: this.refs.text.getValue(),
-      };
-    } else {
-      comment = {
-        // This is different because the input is a native HTML element
-        // rather than a React element.
-        author: this.refs.inlineAuthor.getDOMNode().value,
-        text: this.refs.inlineText.getDOMNode().value,
-      };
-    }
+    let comment = {
+      author: this.refs.author.value,
+      text: this.refs.text.value,
+    };
 
     this.setState({ comment });
   }
@@ -69,13 +54,7 @@ class CommentForm extends React.Component {
     const comment = { author: this.state.comment.author, text: '' };
     this.setState({ comment });
 
-    let ref;
-    if (this.state.formMode < 2) {
-      ref = this.refs.text.getInputDOMNode();
-    } else {
-      ref = React.findDOMNode(this.refs.inlineText);
-    }
-
+    let ref = this.refs.text.getInputDOMNode();
     ref.focus();
   }
 
@@ -91,7 +70,7 @@ class CommentForm extends React.Component {
                   type="text"
                   className="form-control"
                   placeholder="Your Name"
-                  ref="inlineAuthor"
+                  ref="author"
                   value={this.state.comment.author}
                   onChange={this._handleChange}
                   disabled={this.props.ajaxSending}
@@ -102,7 +81,7 @@ class CommentForm extends React.Component {
                   type="text"
                   className="form-control"
                   placeholder={textPlaceholder}
-                  ref="inlineText"
+                  ref="text"
                   value={this.state.comment.text}
                   onChange={this._handleChange}
                   disabled={this.props.ajaxSending}
