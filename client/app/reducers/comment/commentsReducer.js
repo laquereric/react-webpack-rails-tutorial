@@ -2,7 +2,7 @@
 
 import Immutable from 'immutable';
 
-import * as actionTypes from '../../constants/commentsConstants';
+import * as actionTypes from '../../constants/comment/commentsConstants';
 
 export const $$initialState = Immutable.fromJS({
   $$comments: [],

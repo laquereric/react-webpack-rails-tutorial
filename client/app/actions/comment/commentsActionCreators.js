@@ -1,5 +1,5 @@
-import commentsManager from '../utils/commentsManager';
-import * as actionTypes from '../constants/commentsConstants';
+import commentsManager from '../../utils/comment/commentsManager';
+import * as actionTypes from '../../constants/comment/commentsConstants';
 
 export function incrementAjaxCounter() {
   return {
