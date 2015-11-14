@@ -1,8 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import createStore from '../stores/commentsStore';
-import CommentPane from '../components/CommentPane';
+import createStore from '../stores/comment/commentsStore';
+import CommentPane from '../components/comment/CommentPane';
 
 const App = props => {
   const store = createStore(props);

@@ -3,7 +3,7 @@ import Immutable from 'immutable';
 import request from 'axios';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
-import metaTagsManager from '../utils/metaTagsManager';
+import metaTagsManager from '../../utils/metaTagsManager';
 import _ from 'lodash';
 
 class CommentScreen extends React.Component {

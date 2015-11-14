@@ -1,5 +1,5 @@
-import commentsReducer from './commentsReducer';
-import { $$initialState as $$commentsState } from './commentsReducer';
+import commentsReducer from './comment/commentsReducer';
+import { $$initialState as $$commentsState } from './comment/commentsReducer';
 
 export default {
   $$commentsStore: commentsReducer,
